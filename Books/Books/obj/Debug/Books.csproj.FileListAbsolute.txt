@@ -77,3 +77,7 @@ D:\Projects\Books\Books\Books\obj\Debug\Books.csproj.CoreCompileInputs.cache
 D:\Projects\Books\Books\Books\obj\Debug\Books.csproj.CopyComplete
 D:\Projects\Books\Books\Books\obj\Debug\Books.dll
 D:\Projects\Books\Books\Books\obj\Debug\Books.pdb
+D:\Projects\Books\Books\Books\bin\EntityFramework.dll
+D:\Projects\Books\Books\Books\bin\EntityFramework.SqlServer.dll
+D:\Projects\Books\Books\Books\bin\EntityFramework.xml
+D:\Projects\Books\Books\Books\bin\EntityFramework.SqlServer.xml
