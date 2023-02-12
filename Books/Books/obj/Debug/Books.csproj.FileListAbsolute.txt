@@ -81,3 +81,5 @@ D:\Projects\Books\Books\Books\bin\EntityFramework.dll
 D:\Projects\Books\Books\Books\bin\EntityFramework.SqlServer.dll
 D:\Projects\Books\Books\Books\bin\EntityFramework.xml
 D:\Projects\Books\Books\Books\bin\EntityFramework.SqlServer.xml
+D:\Projects\Books\Books\Books\obj\Debug\Books.Migrations.AddNewTables.resources
+D:\Projects\Books\Books\Books\obj\Debug\Books.csproj.GenerateResource.cache

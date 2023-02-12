@@ -13,5 +13,9 @@ namespace Books.Models
 
 
         }
+
+        public DbSet<Category> categories { get; set; }
+
+        public DbSet<Book> books { get; set; }
     }
 }
