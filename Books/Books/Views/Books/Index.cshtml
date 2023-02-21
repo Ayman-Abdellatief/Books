@@ -10,7 +10,7 @@
     <i class="icofont-plus"></i>
     Add New
 </a>
-
+<span id="Message" class="d-none">@TempData["Message"]</span>
 @if (!Model.Any())
 {
     <div class="alert alert-warning" > No Books added yet!</div>
@@ -58,3 +58,16 @@ else
 
 
 
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var messge = $('#Message').text();
+            debugger;
+            if (messge !== '') {
+                toastr.success(messge);
+            }
+        
+        });
+    </script>
+    }

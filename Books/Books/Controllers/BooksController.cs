@@ -108,6 +108,7 @@ namespace Books.Controllers
             }
             _context.SaveChanges();
 
+            TempData["Message"] = "Saved successfuly";
             return RedirectToAction("Index");
 
         }

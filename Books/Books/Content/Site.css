@@ -23,3 +23,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Toaster Override */
+
+#toast-container {
+    margin-top: 50px;
+}
