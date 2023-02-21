@@ -34,7 +34,7 @@ else
             @foreach (var book in Model)
             {
                 <tr>
-                    <td>@book.Title</td>
+                    <td>@Html.ActionLink(book.Title,"Details","Books",new { id = book.Id },null)</td>
                     <td>@book.Author</td>
                     <td>@book.category.Name</td>
                     <td>@book.Description</td>

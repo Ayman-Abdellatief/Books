@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net;
 
 namespace Books.Controllers
 {
@@ -24,7 +25,18 @@ namespace Books.Controllers
             return View(books);
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+            var Book = _context.books.Include(m => m.category).SingleOrDefault(m => m.Id == id) ;
+
+            if(Book == null)
+                return HttpNotFound();
+
+            return View(Book);
+        }
         public ActionResult Create()
         {
             var ViewModel = new BookFormViewModel()
