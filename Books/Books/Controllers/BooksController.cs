@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Books.Controllers
 {
@@ -19,7 +20,8 @@ namespace Books.Controllers
         // GET: Books
         public ActionResult Index()
         {
-            return View();
+            var books = _context.books.Include(m =>m.category).ToList();
+            return View(books);
         }
 
 
