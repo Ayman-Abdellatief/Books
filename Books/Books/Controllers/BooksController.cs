@@ -44,7 +44,32 @@ namespace Books.Controllers
                 categories = _context.categories.Where(x =>x.IsActive).ToList()
         };
 
-            return View(ViewModel);
+            return View("BookForm", ViewModel);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var Book = _context.books.Find(id);
+
+            if (Book == null)
+                return HttpNotFound();
+
+            var ViewModel = new BookFormViewModel
+            {
+                Id = Book.Id,
+                Title = Book.Title,
+                Author = Book.Author,
+                categoryId = Book.categoryId,
+                Description = Book.Description,
+                categories = _context.categories.Where(M => M.IsActive).ToList()
+
+            };
+
+            return View("BookForm", ViewModel);
         }
 
         [HttpPost]
@@ -54,17 +79,33 @@ namespace Books.Controllers
             if(!ModelState.IsValid)
             {
                 model.categories = _context.categories.Where(x => x.IsActive).ToList();
-                return View("Create",model);
+                return View("BookForm", model);
             }
-            var book = new Book
+            if(model.Id == 0)
             {
-                Title = model.Title,
-                Author = model.Author,
-                categoryId = model.categoryId,
-                Description = model.Description
-            };
+                var book = new Book
+                {
+                    Title = model.Title,
+                    Author = model.Author,
+                    categoryId = model.categoryId,
+                    Description = model.Description
+                };
+               
+                _context.books.Add(book);
+              
+            }else
+            {
+                var book = _context.books.Find(model.Id);
 
-            _context.books.Add(book);
+                if (book == null)
+                    return HttpNotFound();
+
+                book.Title = model.Title;
+                book.Author = model.Author;
+                book.categoryId = model.categoryId;
+                book.Description = model.Description;
+
+            }
             _context.SaveChanges();
 
             return RedirectToAction("Index");
