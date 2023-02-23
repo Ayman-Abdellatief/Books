@@ -83,3 +83,9 @@ D:\Projects\Books\Books\Books\bin\EntityFramework.xml
 D:\Projects\Books\Books\Books\bin\EntityFramework.SqlServer.xml
 D:\Projects\Books\Books\Books\obj\Debug\Books.Migrations.AddNewTables.resources
 D:\Projects\Books\Books\Books\obj\Debug\Books.csproj.GenerateResource.cache
+D:\Projects\Books\Books\Books\bin\System.Net.Http.Formatting.dll
+D:\Projects\Books\Books\Books\bin\System.Web.Http.dll
+D:\Projects\Books\Books\Books\bin\System.Web.Http.WebHost.dll
+D:\Projects\Books\Books\Books\bin\System.Net.Http.Formatting.xml
+D:\Projects\Books\Books\Books\bin\System.Web.Http.xml
+D:\Projects\Books\Books\Books\bin\System.Web.Http.WebHost.xml

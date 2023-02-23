@@ -11,50 +11,46 @@
     Add New
 </a>
 <span id="Message" class="d-none">@TempData["Message"]</span>
-@if (!Model.Any())
-{
-    <div class="alert alert-warning" > No Books added yet!</div>
- 
-}
-else
-{
-    <table class="table">
-        <thead>
+<div class="alert alert-warning @(Model.Any() ? "d-none":"")">
+    No Books added yet!
+</div>
+<table class="table  @(Model.Any() ? "":"d-none")">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Added On</th>
+            <th>Actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Added On</th>
-                <th>Actions</th>
+                <td>@Html.ActionLink(book.Title, "Details", "Books", new { id = book.Id }, null)</td>
+                <td>@book.Author</td>
+                <td>@book.category.Name</td>
+                <td>@book.Description</td>
+                <td>@book.AddedOn</td>
+                <td>
+                    <a href="@Url.Action("Edit","Books",new { id=book.Id})" class="btn btn-primary">
+                        <i class="icofont-ui-edit"></i>
+                        Edit
+                    </a>
+                    <a href="javascript:;" class="btn btn-danger js-delete" data-id="@book.Id">
+                        <i class="icofont-ui-close"></i>
+                        Delete
+                    </a>
+                </td>
             </tr>
+        }
+    </tbody>
 
-        </thead>
-        <tbody>
-            @foreach (var book in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(book.Title,"Details","Books",new { id = book.Id },null)</td>
-                    <td>@book.Author</td>
-                    <td>@book.category.Name</td>
-                    <td>@book.Description</td>
-                    <td>@book.AddedOn</td>
-                    <td>
-                        <a href="@Url.Action("Edit","Books",new { id=book.Id})" class="btn btn-primary">
-                            <i class="icofont-ui-edit"></i>
-                            Edit
-                        </a>
-                        <a href="javascript:;" class="btn btn-danger">
-                            <i class="icofont-ui-close"></i>
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
+</table>
 
-    </table>
-}
 
 
 
@@ -62,12 +58,57 @@ else
 {
     <script>
         $(document).ready(function () {
+            toastr.options = {
+                "preventDuplicates": true
+            }
             var messge = $('#Message').text();
             debugger;
             if (messge !== '') {
                 toastr.success(messge);
             }
-        
+
+            $('.js-delete').on('click', function () {
+                var btn = $(this);
+                // alert(btn.data('id'));
+
+                bootbox.confirm({
+                    message: 'Are You sure you Want To Delete this book?',
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-outline-secondary'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '/api/books/' + btn.data('id'),
+                                method: 'DELETE',
+                                success: function () {
+                                    if ($('tbody tr').length === 1)
+                                        $('table').fadeOut(function () {
+                                            this.remove();
+                                            $('.alert').removeClass('d-none');
+                                        });
+                                    else
+                                        btn.parents('tr').fadeOut(function () {
+                                            this.remove();
+                                        });
+                                    toastr.success('book Deleted');
+                                }, error: function () {
+                                    toastr.error('Something went wrong');
+                                }
+                            });
+                        }
+                    }
+                });
+
+
+            })
         });
     </script>
-    }
+}
